@@ -22,6 +22,7 @@ export default class UI {
         tasks.forEach((el) => {
             let element = document.createElement('li');
             element.innerHTML = `
+            <input type="checkbox" id="checkbox" ${el.complete ? 'checked' : ''} />
             <input type="text" id="taskItem" class="description" value="${el.description}" />
             <i class="fa-solid fa-trash-can"></i>
 
@@ -44,6 +45,14 @@ export default class UI {
                 const description = el.value;
                 Store.editItem(description, index);
         })
+        })
+
+        const checkbox = document.querySelectorAll('#checkbox');
+        checkbox.forEach((el, index) => {
+            el.addEventListener('change', (e) => {
+                e.preventDefault();
+                Store.toggleComplete(index);
+            })
         })
     }
     

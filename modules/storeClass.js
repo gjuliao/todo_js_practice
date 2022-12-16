@@ -14,7 +14,7 @@ export default class Store {
        return [];
     }
 
-    static removeItem(el, index) {
+    static removeItem(index) {
         let tasks = this.getLocalStorage();
         tasks.splice(index, 1);
         tasks.forEach((el, index) => {el.index = index});
@@ -31,8 +31,25 @@ export default class Store {
                 return;
             }
         }
-        
-
     }
+
+    static toggleComplete(index) {
+        let tasks = this.getLocalStorage();
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i].index == index) {
+                tasks[i].complete = !tasks[i].complete;
+                this.saveTaskLocalStorage(tasks);
+               
+            }
+        }
+    }
+
+    static clearAll(){
+        let tasks = this.getLocalStorage();
+        let result = tasks.filter(el => el.complete !== true);
+        this.saveTaskLocalStorage(result);
+        UI.displayTask(result);
+    }
+
 }
 
