@@ -24,7 +24,7 @@ export default class UI {
             element.innerHTML = `
             <input type="text" id="taskItem" class="description" value="${el.description}" />
             <i class="fa-solid fa-trash-can"></i>
-            <i class="fa-solid fa-pen-to-square"></i>
+
             `;
             ul.appendChild(element);
         });
@@ -37,13 +37,12 @@ export default class UI {
             })
         })
 
-        const editTask = document.querySelectorAll('.fa-pen-to-square');
+        const editTask = document.querySelectorAll('#taskItem');
         editTask.forEach((el, index) => {
-            const taskItem = document.querySelectorAll('#taskItem');
-            el.addEventListener('click', (e) => {
+            el.addEventListener('change', (e) => {
                 e.preventDefault();
-                console.log(taskItem, index);
-                Store.editItem(el.parentElement, index);
+                const description = el.value;
+                Store.editItem(description, index);
         })
         })
     }

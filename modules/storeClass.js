@@ -23,13 +23,16 @@ export default class Store {
     }
 
     static editItem(description, index) {
-        console.log(index);
-        for (let i = 0; i < this.getLocalStorage().length; i++) {
-            if (this.getLocalStorage()[i].index == index) {
-                this.getLocalStorage()[i].description = el.description;
+        let tasks = this.getLocalStorage();
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i].index == index) {
+                tasks[i].description = description;
+                this.saveTaskLocalStorage(tasks);
+                return;
+            }
         }
+        
 
     }
+}
 
-}
-}
